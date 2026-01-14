@@ -1,6 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- WASI OTP HEX-LOADER CSS -->
+<style>
+    #wasi-hex-loader {
+        position: fixed;
+        inset: 0;
+        background: #ffffff; /* Dark Mode ke liye #0f172a kar sakte hain */
+        z-index: 100000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.8s ease, visibility 0.8s;
+    }
+
+    .hex-container {
+        position: relative;
+        width: 60px;
+        height: 60px;
+    }
+
+    .hexagon {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 4px solid #0061ff; /* WASI Blue */
+        border-radius: 10px;
+        animation: hexRotate 4s infinite linear;
+    }
+
+    .hexagon::before, .hexagon::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: inherit;
+        border-radius: inherit;
+    }
+
+    .hexagon::before { transform: rotate(60deg); border-color: #60a5fa; }
+    .hexagon::after { transform: rotate(-60deg); border-color: #4834d4; }
+
+    .hex-pulse {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 20px;
+        height: 20px;
+        background: #0061ff;
+        border-radius: 50%;
+        animation: hexPulse 1.5s infinite ease-in-out;
+    }
+
+    @keyframes hexRotate {
+        0% { transform: rotate(0deg) scale(1); }
+        50% { transform: rotate(180deg) scale(1.2); }
+        100% { transform: rotate(360deg) scale(1); }
+    }
+
+    @keyframes hexPulse {
+        0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+    }
+
+    .hex-text {
+        margin-top: 50px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        letter-spacing: 4px;
+        color: #1e293b;
+        text-transform: uppercase;
+        animation: blinkText 2s infinite;
+    }
+
+    @keyframes blinkText {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+    }
+
+    .loader-hidden { opacity: 0; visibility: hidden; }
+</style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>‌🇬𝖚‌𝕛‌𝕛‌ₐᵣ⁷¹⁹ 𝑺🅰𝕭☠🇵🇰 | KingsPortal</title>
@@ -233,7 +315,14 @@
     </style>
 </head>
 <body>
-
+<!-- WASI OTP HEX-LOADER HTML -->
+<div id="wasi-hex-loader">
+    <div class="hex-container">
+        <div class="hexagon"></div>
+        <div class="hex-pulse"></div>
+    </div>
+    <div class="hex-text">GUJJAR<span>DATA</span> SECURE</div>
+</div>
     <!-- LIGHT HEADER -->
     <header class="header-brand">
         <h1>‌🇬𝖚‌𝕛‌𝕛‌ₐᵣ⁷¹⁹ 𝑺🅰𝕭☠🇵🇰</h1>
@@ -379,6 +468,22 @@
             `;
         }
     </script>
-
+<!-- WASI OTP HEX-LOADER SCRIPT -->
+<script>
+    window.addEventListener("load", function() {
+        const loader = document.getElementById("wasi-hex-loader");
+        
+        // 5 Seconds Stay Logic
+        setTimeout(() => {
+            loader.classList.add("loader-hidden");
+            
+            // Cleanup: Screen se mukammal hatane ke liye
+            setTimeout(() => {
+                loader.style.display = "none";
+            }, 1000);
+            
+        }, 5000); 
+    });
+</script>
 </body>
   </html>
